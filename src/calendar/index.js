@@ -106,16 +106,15 @@ class Calendar extends Component {
       return;
     }
 
+    if (!doNotTriggerListeners) {
+      const currMont = day.clone();
+      _.invoke(this.props, 'onMonthChange', xdateToData(currMont));
+      _.invoke(this.props, 'onVisibleMonthsChange', [xdateToData(currMont)]);
+    }
+
     this.setState(
       {
         currentMonth: day.clone()
-      },
-      () => {
-        if (!doNotTriggerListeners) {
-          const currMont = this.state.currentMonth.clone();
-          _.invoke(this.props, 'onMonthChange', xdateToData(currMont));
-          _.invoke(this.props, 'onVisibleMonthsChange', [xdateToData(currMont)]);
-        }
       }
     );
   };
