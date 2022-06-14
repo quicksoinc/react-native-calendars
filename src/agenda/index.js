@@ -11,12 +11,13 @@ import {VelocityTracker} from '../input';
 import styleConstructor from './style';
 import CalendarList from '../calendar-list';
 import ReservationList from './reservation-list';
+import {ViewPropTypes} from 'deprecated-react-native-prop-types';
 
 const HEADER_HEIGHT = 104;
 const KNOB_HEIGHT = 24;
 
 //Fallback for react-native-web or when RN version is < 0.44
-const {Text, View, Dimensions, Animated, ViewPropTypes} = ReactNative;
+const {Text, View, Dimensions, Animated} = ReactNative;
 const viewPropTypes =
   typeof document !== 'undefined' ? PropTypes.shape({style: PropTypes.object}) : ViewPropTypes || View.propTypes;
 
@@ -48,8 +49,8 @@ export default class AgendaView extends Component {
     /** callback that gets called when day changes while scrolling agenda list */
     onDaychange: PropTypes.func, //TODO: Should be renamed 'onDayChange'
     /** specify how agenda knob should look like */
-    renderKnob: PropTypes.func, 
-    /** initially selected day */ 
+    renderKnob: PropTypes.func,
+    /** initially selected day */
     selected: PropTypes.any, //TODO: Should be renamed 'selectedDay'
     /** Hide knob button. Default = false */
     hideKnob: PropTypes.bool

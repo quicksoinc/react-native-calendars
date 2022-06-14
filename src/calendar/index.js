@@ -13,9 +13,11 @@ import styleConstructor from './style';
 import CalendarHeader from './header';
 import BasicDay from './day/basic';
 import Day from './day/index';
+import {ViewPropTypes} from 'deprecated-react-native-prop-types';
 
 //Fallback for react-native-web or when RN version is < 0.44
-const {View, ViewPropTypes} = ReactNative;
+const {View} = ReactNative;
+
 const viewPropTypes =
   typeof document !== 'undefined' ? PropTypes.shape({style: PropTypes.object}) : ViewPropTypes || View.propTypes;
 const EmptyArray = [];
@@ -93,10 +95,10 @@ class Calendar extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.current && prevProps.current !== this.props.current) {
-      this.setState({currentMonth: parseDate(this.props.current)})
+      this.setState({currentMonth: parseDate(this.props.current)});
     }
   }
-  
+
   addMonth = count => {
     this.updateMonth(this.state.currentMonth.clone().addMonths(count, true));
   };
@@ -112,11 +114,9 @@ class Calendar extends Component {
       _.invoke(this.props, 'onVisibleMonthsChange', [xdateToData(currMont)]);
     }
 
-    this.setState(
-      {
-        currentMonth: day.clone()
-      }
-    );
+    this.setState({
+      currentMonth: day.clone()
+    });
   };
 
   _handleDayInteraction(date, interaction) {
@@ -309,7 +309,7 @@ class Calendar extends Component {
     const gestureProps = enableSwipeMonths ? {onSwipe: (direction, state) => this.onSwipe(direction, state)} : {};
 
     return (
-      <GestureComponent {...gestureProps} style={gestureStyle} >
+      <GestureComponent {...gestureProps} style={gestureStyle}>
         <View
           style={[this.style.container, style]}
           accessibilityElementsHidden={this.props.accessibilityElementsHidden} // iOS
